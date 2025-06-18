@@ -1,0 +1,223 @@
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background 0.3s ease, color 0.3s ease;
+    background-color: #f3f0ec;
+    color: #222;
+  }
+  
+  html, body {
+    height: 100%;
+  }
+  
+  body.dark {
+    background-color: #1a1a1a;
+    color: #292a2f;
+  }
+  
+  .closet-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    min-height: 100vh;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgb(200, 218, 221);
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 2rem;
+  }
+  
+  header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+  }
+  
+  header button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    background: #333;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  
+  .closet-form {
+    max-width: 600px;
+    width: 100%;
+    background: #d9e1e3;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  .closet-form input[type="text"],
+  .closet-form select {
+    padding: 0.6rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+  }
+  
+  .closet-item-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .closet-item-row button {
+    background: #ff6961;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .add-btn,
+  .submit-btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background: #222;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-right: 0.5rem;
+  }
+  
+  .add-btn:hover,
+  .submit-btn:hover {
+    background: #444;
+  }
+  
+  .error-msg {
+    color: crimson;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .outfit-preview::before {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 6px;
+    margin-bottom: 1rem;
+    border-radius: 3px;
+    background: linear-gradient(145deg, #bbb, #ddd, #bbb);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+    
+  
+  .outfit-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ffffffee;
+    padding: 2rem;
+    margin-top: 2rem;
+    border-radius: 20px;
+    border: 4px solid #e2e2e2;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .outfit-preview img {
+    max-width: 100%;
+    border-radius: 12px;
+    border: 2px solid #ccc;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    background: #fefefe;
+  }
+  
+  body.dark .outfit-preview {
+    background: #2a2a2a;
+    border-color: #444;
+  }
+  body.dark .outfit-preview img {
+    background: #111;
+    border-color: #444;
+  }  
+  
+  .prompt-suggestions {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .download-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: #000;
+    color: #fff;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .download-btn:hover {
+    background: #333;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .closet-item-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .closet-item-row > * {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+  
+    .closet-form {
+      padding: 1.5rem;
+    }
+  
+    header {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      text-align: center;
+    }
+  
+    header h1 {
+      font-size: 1.4rem;
+    }
+  
+    header button {
+      font-size: 0.9rem;
+      padding: 0.4rem 1rem;
+    }
+  }
+  
