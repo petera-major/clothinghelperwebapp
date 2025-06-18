@@ -20,7 +20,7 @@ export default function LandingPage({ onEnter }) {
     window.addEventListener('click', startAudio);
   
     return () => window.removeEventListener('click', startAudio);
-  }, []);
+  }, [playing]);
 
   return (
     <div className="landing-wrapper">
