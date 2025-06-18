@@ -7,24 +7,20 @@ export default function LandingPage({ onEnter }) {
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 0.4;
-      audioRef.current.play()
-        .then(() => setPlaying(true))
-        .catch((e) => {
-          console.log("Autoplay blocked. User interaction needed.", e);
-        });
-    }
+    const startAudio = () => {
+      if (audioRef.current && !playing) {
+        audioRef.current.volume = 0.4;
+        audioRef.current.play()
+          .then(() => setPlaying(true))
+          .catch((err) => console.log("Autoplay blocked:", err));
+      }
+      window.removeEventListener('click', startAudio);
+    };
+  
+    window.addEventListener('click', startAudio);
+  
+    return () => window.removeEventListener('click', startAudio);
   }, []);
-
-  const toggleAudio = () => {
-    if (playing) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
-    }
-    setPlaying(!playing);
-  };
 
   return (
     <div className="landing-wrapper">
