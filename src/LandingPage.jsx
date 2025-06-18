@@ -30,9 +30,6 @@ export default function LandingPage({ onEnter }) {
           <h1>EnvisionYourTaste</h1>
           <p>AI-powered outfit generator for those who want to elevate their style.</p>
           <button onClick={onEnter}>Enter Your Closet</button>
-          <button onClick={toggleAudio} className="music-toggle">
-            {playing ? "Pause Music 🎵" : "Play Music 🎶"}
-          </button>
           <audio ref={audioRef} src={bgMusic} loop />
         </div>
       </div>
