@@ -146,6 +146,32 @@ body {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     background: #fefefe;
   }
+
+  .recommendation-box {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #fff8f0;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: left;
+    max-width: 600px;
+  }
+  
+  .recommendation-box ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .recommendation-box li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .recommendation-box a {
+    color: #2a2a2a;
+    text-decoration: underline;
+    font-weight: 500;
+  }
+  
   
   body.dark .outfit-preview {
     background: #2a2a2a;

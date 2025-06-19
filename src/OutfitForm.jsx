@@ -5,11 +5,12 @@ const CLOTHING_TYPES = ["Top", "Bottom", "Shoes", "Accessory", "Outerwear", "Bag
 
 export default function OutfitForm() {
   const [prompt, setPrompt] = useState("");
-  const [items, setItems] = useState([{ file: null, tag: "Top" }]);
+  const [items, setItems] = useState([{ tag: "Top", description: "" }]);
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [darkMode, setDarkMode] = useState(false);
+  const [recommendations, setRecommendations] = useState([]);
 
   useEffect(() => {
     document.body.className = darkMode ? "dark" : "light";
@@ -23,7 +24,7 @@ export default function OutfitForm() {
 
   const addItem = () => {
     if (items.length < 6) {
-      setItems([...items, { file: null, tag: "Top" }]);
+      setItems([...items, { tag: "Top", description: "" }]);
     }
   };
 
@@ -42,10 +43,7 @@ export default function OutfitForm() {
     const formData = new FormData();
     formData.append("prompt", prompt);
     items.forEach((item) => {
-      if (item.file) {
-        formData.append("files", item.file);
-        formData.append("tags", item.tag);
-      }
+      formData.append("tags", `${item.tag}: ${item.description}`);
     });
 
     try {
@@ -56,6 +54,7 @@ export default function OutfitForm() {
       const data = await res.json();
       if (data.image_url) {
         setImageUrl(data.image_url);
+        setRecommendations(data.recommendations || []);
       } else {
         setError("Something went wrong pookie");
       }
@@ -77,28 +76,39 @@ export default function OutfitForm() {
 
       {imageUrl && (
         <div className="outfit-preview">
-          <h2>Your Personalized Outfit</h2>
-          <img src={imageUrl} alt="Generated fit" />
-          <a
-            href={imageUrl}
-            download="ClosetAI-outfit.png"
-            className="download-btn"
-          >
+          <h2>Your Styled Outfit</h2>
+          <img src={imageUrl} alt="Generated outfit" />
+          <a href={imageUrl} download="ClosetAI-outfit.png" className="download-btn">
             ⬇ Download Your Outfit
           </a>
+          {recommendations.length > 0 && (
+            <div className="recommendation-box">
+                <h3>Outfit Picks</h3>
+                <ul>
+                {recommendations.map((rec, idx) => (
+                    <li key={idx}>
+                    <a href={rec} target="_blank" rel="noopener noreferrer">
+                        {rec}
+                    </a>
+                    </li>
+                ))}
+                </ul>
+            </div>
+            )}
+
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="closet-form">
         <input
           type="text"
-          placeholder="What’s the vibe today? (e.g. clean girl, date night, soft grunge)"
+          placeholder="What’s the vibe today? (e.g. cozy, bold, clean girl aesthetic)"
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
         />
 
         <p className="prompt-suggestions">
-          💡 Try uploading 3-6 clothing pieces and describe the look
+          💡 Add at least 3–6 clothing pieces with simple descriptions.
         </p>
 
         {items.map((item, index) => (
@@ -112,15 +122,16 @@ export default function OutfitForm() {
               ))}
             </select>
             <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleItemChange(index, "file", e.target.files[0])}
+              type="text"
+              placeholder="Describe the item (e.g. cropped black tee)"
+              value={item.description}
+              onChange={(e) => handleItemChange(index, "description", e.target.value)}
             />
             <button type="button" onClick={() => removeItem(index)}>✕</button>
           </div>
         ))}
 
-        <button type="button" onClick={addItem} className="add-btn">+ Add Clothing Image</button>
+        <button type="button" onClick={addItem} className="add-btn">+ Add Item</button>
 
         <button type="submit" className="submit-btn">
           {loading ? "Styling your fit..." : "Generate My Outfit"}
@@ -131,4 +142,3 @@ export default function OutfitForm() {
     </div>
   );
 }
-
